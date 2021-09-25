@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\finbo\\Desktop\\University\\Trimester 2 2021\\3802ICT\\Assignments\\lombok.jar"
+    ]
+}
