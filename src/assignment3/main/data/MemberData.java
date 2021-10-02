@@ -9,5 +9,5 @@ import lombok.Value;
     String name;
     String email;
     String password;
-    List<BookLendingData> booksLent;
+    //List<BookLendingData> booksLent;
 }
