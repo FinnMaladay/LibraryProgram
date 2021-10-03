@@ -7,6 +7,5 @@ import lombok.Value;
     String title;
     String bookId;
     Integer publishYear;
-
     BookLendingData bookLent;
 }

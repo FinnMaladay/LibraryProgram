@@ -15,6 +15,4 @@ import lombok.Value;
     Integer lentYear;
     Integer lentMonth;
     Integer lentDay;
-
-    String bookId; 
 }

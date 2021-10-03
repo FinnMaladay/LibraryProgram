@@ -9,5 +9,6 @@ import lombok.Value;
     String name;
     String email;
     String password;
+    Boolean isBlocked;
     //List<BookLendingData> booksLent;
 }

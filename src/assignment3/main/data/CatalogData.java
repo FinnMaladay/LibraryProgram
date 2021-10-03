@@ -1,6 +1,5 @@
 package assignment3.main.data;
 
-import java.util.List;
 import java.util.Map;
 
 import lombok.Value;
@@ -10,6 +9,6 @@ import lombok.Value;
 @Value public class CatalogData {
     String type;
 
-    Map<String, BookData> bookByTitle; //given a set string, find book associated to string key
-    //List<BookData> Catalog;
+    Map<String, BookData> bookByTitle; //given a string title, find book associated to string key
+    Map<String, AuthorData> authorByName; //given a string name, find author associated to string key
 }

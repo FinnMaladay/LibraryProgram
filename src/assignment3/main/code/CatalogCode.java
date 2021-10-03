@@ -5,10 +5,27 @@ import assignment3.main.data.*;
 //Depends on: LibrarianCode
 
 public class CatalogCode {
-    public static void searchByTitle(){
+    public static void login(){
 
     }
-    public static void searchByAuthor(){
+    public static void search(){
 
     }
+
+    public static void borrow(){
+        
+    }
+
+    public static void banUser(){
+
+    }
+
+    public static void unbanUser(){
+
+    }
+
+    public static void displayBooks(){
+
+    }
+
 }

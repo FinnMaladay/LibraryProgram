@@ -6,6 +6,5 @@ import lombok.Value;
 
 @Value public class AuthorData {
     String name;
-    // List<String> BookIds;
-    // List<String> BookNames;
+    List<String> BookIds;
 }

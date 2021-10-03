@@ -27,34 +27,44 @@ public class MyLibrary {
         var jessica = new LibrarianData("Jessica", "jessica@email", "password");
         var jeff = new LibrarianData("Jeff", "jeff@email", "password");
         
+        List<LibrarianData> librarians = List.of(susie, tim, jessica, jeff);
         //Members
-        var david = new MemberData("David Lenate", "david@email", "password");
-        var nick = new MemberData("Nick Star", "nick@email", "password");
-        var tory = new MemberData("Tory Victoria", "tory@email", "password");
-        var vickie = new MemberData("Vickie Smyth", "vicke@email", "password");
+        var david = new MemberData("David Lenate", "david@email", "password", false);
+        var nick = new MemberData("Nick Star", "nick@email", "password", false);
+        var tory = new MemberData("Tory Victoria", "tory@email", "password", true);
+        var vickie = new MemberData("Vickie Smyth", "vicke@email", "password",false);
+
+        List<MemberData> members = List.of(david, nick, tory, vickie);
+        //BookIDs
+        String spidermanBookId = "900012-3124"; //authors: Stan Lee, Steve Ditko; 
+        String avengersBookId = "900012-3202"; //authors: Stan Lee
+        String sherlockBookId = "900012-1023"; //authors: Arthur Conan Doyle
+        String winneBookId = "900012-0001"; //authors: A. A. Milne
+        String myheroBookId = "900012-2200"; //authors: Kohei Horikoshi
+        String designPatternBookId = "900012-0044"; //authors: Erich Gamma; Richard Helm; Ralph Johnson · John Vlissides
+        String flashBookId = "900012-1101"; //authors: Jeremy Adams 
+        String stripedPyjamas = "900012-1303"; //authors: John Boyne
 
         //Author
 
-        //Books
+
+        // Library
         
-        // Date set for Librarians and Memebers
-        List<LibrarianData> librarians = Arrays.asList(susie, tim, jessica, jeff); 
-
-        List<MemberData> members = Arrays.asList(david, nick, tory, vickie);
+        var library = new LibraryData(librarians, members);
 
 
-
-
+        //library.getLibrarians().
         //RQ 1 Two users: Librarian and Member
         //RQ 2 Users log in using email and password
 
         // Login for a librarian
         // Valid login
-        email = "susie@email";
-
+        LibrarianCode.librarianLogin("jessica@email", "password", library.getLibrarians());
 
         // Login for a memeber
-        // Invalid login
+        // valid login
+        MemberCode.MemberLogin("david@email", "password", library.getMembers());
+
 
 
         //RQ 3 Members can borrow book
@@ -65,8 +75,19 @@ public class MyLibrary {
 
         //RQ 6
 
-        //RQ 7
+        //RQ 7 Multiple books can exist
+
+        // print out entire library to show the multiple copies of a book exists
+        
 
     }
 
 }
+
+/***Developer notes
+ * 
+ * var david = new MemberData("David Lenate", "david@email", "password", false);
+
+        var nick = new MemberData("Nick Star", "nick@email", "password", false);
+        david = nick; //can use this for overwritten immutable data (without needing to make Data classes mutable)
+ */

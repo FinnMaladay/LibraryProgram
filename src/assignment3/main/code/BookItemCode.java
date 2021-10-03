@@ -4,6 +4,13 @@ import assignment3.main.data.*;
 
 public class BookItemCode {
     
+    public static void searchByTitle()
+    {
 
-    //retrive data from a book
+    }
+
+    public static void searchByAuthor()
+    {
+        
+    }
 }
