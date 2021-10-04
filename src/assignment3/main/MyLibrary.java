@@ -2,6 +2,7 @@ package assignment3.main;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import assignment3.main.code.*;
 import assignment3.main.data.*;
@@ -20,7 +21,10 @@ public class MyLibrary {
     public static void main(String[] args) {
 
         //Test Data
-        
+        //Empty data: for default data (e.g BookLendingData when a book hasn't been lent or when a user hasn't borrowed a book)
+        var bookNotBorrow = new BookLendingData(false, 0, 0, 0, 0, 0, 0);// default data for when a book hasn't been loaned out
+        List<BookLendingData> borrowedBooks = List.of();
+
         //Librarians
         var susie = new LibrarianData("Susie Q", "susie@email", "password");
         var tim = new LibrarianData("Tim C", "tim@email", "password");
@@ -29,10 +33,10 @@ public class MyLibrary {
         
         List<LibrarianData> librarians = List.of(susie, tim, jessica, jeff);
         //Members
-        var david = new MemberData("David Lenate", "david@email", "password", false);
-        var nick = new MemberData("Nick Star", "nick@email", "password", false);
-        var tory = new MemberData("Tory Victoria", "tory@email", "password", true);
-        var vickie = new MemberData("Vickie Smyth", "vicke@email", "password",false);
+        var david = new MemberData("David Lenate", "david@email", "password", false, borrowedBooks);
+        var nick = new MemberData("Nick Star", "nick@email", "password", false, borrowedBooks);
+        var tory = new MemberData("Tory Victoria", "tory@email", "password", true, borrowedBooks);
+        var vickie = new MemberData("Vickie Smyth", "vicke@email", "password",false, borrowedBooks);
 
         List<MemberData> members = List.of(david, nick, tory, vickie);
         //BookIDs
@@ -46,14 +50,24 @@ public class MyLibrary {
         String stripedPyjamas = "900012-1303"; //authors: John Boyne
 
         //Author
+        var stan = new AuthorData("Stan-Lee", List.of(spidermanBookId, avengersBookId));
+        var steve = new AuthorData("Steve-Ditko", List.of(spidermanBookId));
 
+        //Books
+        var spiderman = new BookItemData("Spider-Man", spidermanBookId, 1965, bookNotBorrow);
+        var copiesofSpiderman = new BookData(List.of(stan.getName(), steve.getName()), List.of(spiderman, spiderman, spiderman));
+        var avengers = new BookItemData("Avengers", avengersBookId, 1963, bookNotBorrow);
+        var copiesofAvengers = new BookData(List.of(stan.getName()), List.of(avengers));
 
         // Library
+        var catalog = new CatalogData("books", Map.of("Spider-Man", copiesofSpiderman, "Avengers", copiesofAvengers), 
+        Map.of(spidermanBookId, copiesofSpiderman, avengersBookId, copiesofAvengers), 
+        Map.of("Stan-Lee", stan, "Steve-Ditko", steve));
+
+        var library = new LibraryData(librarians, members, catalog);
+
+
         
-        var library = new LibraryData(librarians, members);
-
-
-        //library.getLibrarians().
         //RQ 1 Two users: Librarian and Member
         //RQ 2 Users log in using email and password
 
@@ -68,8 +82,16 @@ public class MyLibrary {
 
 
         //RQ 3 Members can borrow book
+        
+        
 
-        //RQ 4
+        //RQ 4 Librarians and Members can Search for books
+        // Search by title
+        CatalogCode.search("title", catalog, "Spider-Man");
+
+        // Search by Author
+        //CatalogCode.search("author", catalog, "Stan-Lee");
+
 
         //RQ 5
 

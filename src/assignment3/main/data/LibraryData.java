@@ -8,5 +8,5 @@ import lombok.Value;
     List<LibrarianData> librarians;
     List<MemberData> members;
     //List<MemberData> blockedMembers;
-    //CatalogData catalog;
+    CatalogData catalog;
 }

@@ -10,5 +10,6 @@ import lombok.Value;
     String type;
 
     Map<String, BookData> bookByTitle; //given a string title, find book associated to string key
+    Map<String, BookData> bookById; //give an id value, find book associated to it (used for search by author)
     Map<String, AuthorData> authorByName; //given a string name, find author associated to string key
 }

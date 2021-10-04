@@ -10,5 +10,5 @@ import lombok.Value;
     String email;
     String password;
     Boolean isBlocked;
-    //List<BookLendingData> booksLent;
+    List<BookLendingData> booksLent;
 }
