@@ -19,7 +19,7 @@ public class CatalogCode {
         }
     }
 
-    public static void borrow(){
+    public static void borrow(CatalogData catalog, String name){
         
     }
 

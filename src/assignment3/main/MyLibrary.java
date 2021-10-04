@@ -82,7 +82,13 @@ public class MyLibrary {
 
 
         //RQ 3 Members can borrow book
+        //must ensure that it is a member who is logged in to allow for a borrowed book
+        currentUser = nick.getName();
+        loggedIn = true;
+        currentUserStatus = nick.getStatus();
+
         
+
         
 
         //RQ 4 Librarians and Members can Search for books
@@ -90,7 +96,7 @@ public class MyLibrary {
         CatalogCode.search("title", catalog, "Spider-Man");
 
         // Search by Author
-        //CatalogCode.search("author", catalog, "Stan-Lee");
+        CatalogCode.search("author", catalog, "Stan-Lee");
 
 
         //RQ 5
