@@ -1,6 +1,5 @@
 package assignment3.main;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,9 @@ public class MyLibrary {
         //Test Data
         //Empty data: for default data (e.g BookLendingData when a book hasn't been lent or when a user hasn't borrowed a book)
         var bookNotBorrow = new BookLendingData(false, 0, 0, 0, 0, 0, 0);// default data for when a book hasn't been loaned out
+        var bookBorrowed = new BookLendingData(true, 2021, 10, 18, 2021, 10, 4);// default data for when a book has been loaned out
         List<BookLendingData> borrowedBooks = List.of();
+        Map<String, MemberData> blockedMembers = Map.of();
 
         //Librarians
         var susie = new LibrarianData("Susie Q", "susie@email", "password");
@@ -64,7 +65,7 @@ public class MyLibrary {
         Map.of(spidermanBookId, copiesofSpiderman, avengersBookId, copiesofAvengers), 
         Map.of("Stan-Lee", stan, "Steve-Ditko", steve));
 
-        var library = new LibraryData(librarians, members, catalog);
+        var library = new LibraryData(librarians, members, blockedMembers, catalog);
 
 
         
@@ -86,7 +87,13 @@ public class MyLibrary {
         currentUser = nick.getName();
         loggedIn = true;
         currentUserStatus = nick.getStatus();
-
+        if(loggedIn && currentUserStatus.toLowerCase().equals("member"))
+        {
+            library = CatalogCode.borrow(library, nick, "Spider-Man");
+        }
+        else{
+            System.out.println("Current user is not a Member: please log in as a member");
+        }
         
 
         
