@@ -1,5 +1,6 @@
 package assignment3.main;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,8 +62,15 @@ public class MyLibrary {
         var copiesofAvengers = new BookData(List.of(stan.getName()), List.of(avengers));
 
         // Library
-        var catalog = new CatalogData("books", Map.of("Spider-Man", copiesofSpiderman, "Avengers", copiesofAvengers), 
-        Map.of(spidermanBookId, copiesofSpiderman, avengersBookId, copiesofAvengers), 
+        Map<String,BookData> mapBookByTitle = new HashMap<String, BookData>();
+        mapBookByTitle.put("Spider-Man", copiesofSpiderman);
+        mapBookByTitle.put("Avengers", copiesofAvengers);
+        Map<String,BookData> mapBookByID = new HashMap<String, BookData>();
+        mapBookByID.put(spidermanBookId, copiesofSpiderman);
+        mapBookByID.put(avengersBookId, copiesofAvengers);
+
+
+        var catalog = new CatalogData("books", mapBookByTitle, mapBookByID, 
         Map.of("Stan-Lee", stan, "Steve-Ditko", steve));
 
         var library = new LibraryData(librarians, members, blockedMembers, catalog);
@@ -89,13 +97,12 @@ public class MyLibrary {
         currentUserStatus = nick.getStatus();
         if(loggedIn && currentUserStatus.toLowerCase().equals("member"))
         {
+            //find a way to print that a book has been borrowed (look to display status of current book)
             library = CatalogCode.borrow(library, nick, "Spider-Man");
         }
         else{
             System.out.println("Current user is not a Member: please log in as a member");
         }
-        
-
         
 
         //RQ 4 Librarians and Members can Search for books
@@ -108,13 +115,16 @@ public class MyLibrary {
 
         //RQ 5
 
-        //RQ 6
+        //RQ 6 
 
         //RQ 7 Multiple books can exist
+        //Prints all avaliable books currently in library Catalog
+        for (Map.Entry<String, BookData> bookCollection : library.getCatalog().getBookByTitle().entrySet()) {
+            bookCollection.getValue().getBooks().forEach((book)->{System.out.println(book.getTitle());});
+        }
 
         // print out entire library to show the multiple copies of a book exists
         
-
     }
 
 }

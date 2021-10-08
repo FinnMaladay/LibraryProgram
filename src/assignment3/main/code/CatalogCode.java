@@ -1,8 +1,9 @@
 package assignment3.main.code;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import assignment3.main.data.*;
 
@@ -23,64 +24,50 @@ public class CatalogCode {
         }
     }
 
-    //will need to return book data
-    public static void updatedBookData(BookItemData singleBook, LibraryData library, String title)
-    {
-        /**
-        * 
-            BookData(List.of(stan.getName(), steve.getName()), List.of(spiderman, spiderman, spiderman));
-        */
-
-        //List of authors to current book
-        List<String> authors = new ArrayList<String>();
-        List<String> listofBooks = new ArrayList<String>();
-       
-        
-        
-
-        authors.addAll(library.getCatalog().getBookByTitle().get(title).getAuthorName());
-        
-         
-    }
-
     public static LibraryData borrow(LibraryData library, MemberData member, String title){
         
-        if(member.getIsBlocked())
+        if(member.getIsBlocked()) //if the member searching is blocked...
         {
             System.out.println(member.getName() + " is blocked from library system");
-            return library; //return old library system
+            return library; //...return current library system
         }
 
         //check that the book in interest hasn't been borrowed yet
-        var bookSet = library.getCatalog().getBookByTitle().get(title).getBooks();
+        var bookSet = library.getCatalog().getBookByTitle().get(title).getBooks(); //get current set of copies for book
         Integer index = BookLendingCode.bookedLentOut(bookSet); //check to see if any copies of desired book are avaliable
-        if(index > -1)
+        if(index > -1) // if index returns -1, no copies are valiable 
         {
             //Create new book lending data
             var bookBorrowed = new BookLendingData(true, 2021, 10, 18, 2021, 10, 4);
 
             var book = bookSet.get(index);
             //Update Book Item Data
-            var updateBook = new BookItemData(title, book.getBookId(), book.getPublishYear(), bookBorrowed);
-            updatedBookData(updateBook, library, title);
-            //Update Book Data var bookData = 
-
+            var updateBookItemData = new BookItemData(title, book.getBookId(), book.getPublishYear(), bookBorrowed);
+            
+            //Update Book Data (update list of copies)
+            var updateBookData = BookLendingCode.updatedBookData(updateBookItemData, library, title, index);
 
             //Update Catalog
-            //var catalog = new CatalogData("books", Map.of("Spider-Man", copiesofSpiderman, "Avengers", copiesofAvengers), 
-            
+            // Find Map with Key = title, replace data with updateBookData
+            library.getCatalog().getBookByTitle().replace(title, updateBookData);
+
+            // BookId need to be updated as well
+            String bookId = bookSet.get(0).getBookId();
+            library.getCatalog().getBookById().replace(bookId, updateBookData);
 
             //Update Member Data
-
+            var newMemberList = MemberCode.UpdateMember(member, bookBorrowed, library);
             
-
+            //Update Library and Return new Library
+            var newLibrary = new LibraryData(library.getLibrarians(), newMemberList, library.getBlockedMembers(), library.getCatalog());
+            return newLibrary;
+            
         }else
         {
             System.out.println("All copies of Book have been lent out");
             return library;
         }
 
-        return library;
     }
 
     public static void banUser(){

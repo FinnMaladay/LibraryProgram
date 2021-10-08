@@ -1,5 +1,6 @@
 package assignment3.main.code;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import assignment3.main.data.*;
@@ -21,6 +22,23 @@ public class BookLendingCode {
         }
 
         return -1;
+    }
+    //will need to return book data
+    public static BookData updatedBookData(BookItemData singleBook, LibraryData library, String title, Integer index)
+    {
+        
+
+        //List of authors to current book
+        List<String> authors = new ArrayList<String>();
+        List<BookItemData> listofBooks = new ArrayList<BookItemData>();
+       
+        
+        authors.addAll(library.getCatalog().getBookByTitle().get(title).getAuthorName());
+        listofBooks.addAll(library.getCatalog().getBookByTitle().get(title).getBooks());
+        listofBooks.set(index, singleBook);
+        var newBookData = new BookData(authors, listofBooks);
+        return newBookData;
+         
     }
 
 
