@@ -22,8 +22,8 @@ public class MyLibrary {
 
         //Test Data
         //Empty data: for default data (e.g BookLendingData when a book hasn't been lent or when a user hasn't borrowed a book)
-        var bookNotBorrow = new BookLendingData(false, 0, 0, 0, 0, 0, 0);// default data for when a book hasn't been loaned out
-        var bookBorrowed = new BookLendingData(true, 2021, 10, 18, 2021, 10, 4);// default data for when a book has been loaned out
+        var bookNotBorrow = new BookLendingData(false, "0" ,0, 0, 0, 0, 0, 0);// default data for when a book hasn't been loaned out
+        var bookBorrowed = new BookLendingData(true, "1200-1199", 2021, 10, 18, 2021, 10, 4);// default data for when a book has been loaned out
         List<BookLendingData> borrowedBooks = List.of();
         Map<String, MemberData> blockedMembers = Map.of();
 
@@ -82,16 +82,19 @@ public class MyLibrary {
 
         // Login for a librarian
         // Valid login
+        System.out.println("\n RQ1 & RQ2 - Librarian Logging:");
         LibrarianCode.librarianLogin("jessica@email", "password", library.getLibrarians());
 
         // Login for a memeber
         // valid login
+        System.out.println(" \n RQ1 & RQ2 - Member Logging:");
         MemberCode.MemberLogin("david@email", "password", library.getMembers());
 
 
 
         //RQ 3 Members can borrow book
         //must ensure that it is a member who is logged in to allow for a borrowed book
+        System.out.println("\n RQ3 - Member can borrow a book");
         currentUser = nick.getName();
         loggedIn = true;
         currentUserStatus = nick.getStatus();
@@ -99,10 +102,10 @@ public class MyLibrary {
         {
             var member = MemberCode.MemberInfo(library, currentUser);
             //find a way to print that a book has been borrowed (look to display status of current book)
-            library = CatalogCode.borrow(library, member, "Spider-Man");
+            library = CatalogCode.borrow(library, member, "Spider-Man", "1200-1200");
 
             var member2 = MemberCode.MemberInfo(library, currentUser);
-            library = CatalogCode.borrow(library, member2, "Avengers");
+            library = CatalogCode.borrow(library, member2, "Avengers", "1200-1201");
         }
         else{
             System.out.println("Current user is not a Member: please log in as a member");
@@ -120,7 +123,8 @@ public class MyLibrary {
         //RQ 5
 
         //RQ 6 Librarians can display call books borrowed by a memeber
-        
+        var member = MemberCode.MemberInfo(library, currentUser);
+        LibrarianCode.displayLentBooks(library, member);
 
         //RQ 7 Multiple books can exist
         //Prints all avaliable books currently in library Catalog

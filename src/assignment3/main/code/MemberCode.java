@@ -53,4 +53,14 @@ public class MemberCode extends UserCode{
         
         return newMemberList;
     }
+
+    public static List<String> ListOfBorrowedBooks(MemberData member)
+    {
+        List<String> listOfBorrowIdCodes = new ArrayList<String>();
+        for (var borrowId : member.getBooksLent()) {
+            listOfBorrowIdCodes.add(borrowId.getLendOutCode());
+        }
+        return listOfBorrowIdCodes;
+    }
+
 }

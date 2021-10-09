@@ -24,7 +24,7 @@ public class CatalogCode {
         }
     }
 
-    public static LibraryData borrow(LibraryData library, MemberData member, String title){
+    public static LibraryData borrow(LibraryData library, MemberData member, String title, String BorrowCode){
         
         if(member.getIsBlocked()) //if the member searching is blocked...
         {
@@ -40,7 +40,7 @@ public class CatalogCode {
         if(index > -1) // if index returns -1, no copies are valiable 
         {
             //Create new book lending data
-            var bookBorrowed = new BookLendingData(true, 2021, 10, 18, 2021, 10, 4);
+            var bookBorrowed = new BookLendingData(true, BorrowCode, 2021, 10, 18, 2021, 10, 4);
 
             
             
