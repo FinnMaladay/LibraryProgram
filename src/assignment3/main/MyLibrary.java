@@ -97,8 +97,12 @@ public class MyLibrary {
         currentUserStatus = nick.getStatus();
         if(loggedIn && currentUserStatus.toLowerCase().equals("member"))
         {
+            var member = MemberCode.MemberInfo(library, currentUser);
             //find a way to print that a book has been borrowed (look to display status of current book)
-            library = CatalogCode.borrow(library, nick, "Spider-Man");
+            library = CatalogCode.borrow(library, member, "Spider-Man");
+
+            var member2 = MemberCode.MemberInfo(library, currentUser);
+            library = CatalogCode.borrow(library, member2, "Avengers");
         }
         else{
             System.out.println("Current user is not a Member: please log in as a member");
@@ -115,7 +119,8 @@ public class MyLibrary {
 
         //RQ 5
 
-        //RQ 6 
+        //RQ 6 Librarians can display call books borrowed by a memeber
+        
 
         //RQ 7 Multiple books can exist
         //Prints all avaliable books currently in library Catalog

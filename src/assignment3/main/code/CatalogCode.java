@@ -35,11 +35,15 @@ public class CatalogCode {
         //check that the book in interest hasn't been borrowed yet
         var bookSet = library.getCatalog().getBookByTitle().get(title).getBooks(); //get current set of copies for book
         Integer index = BookLendingCode.bookedLentOut(bookSet); //check to see if any copies of desired book are avaliable
+
+        
         if(index > -1) // if index returns -1, no copies are valiable 
         {
             //Create new book lending data
             var bookBorrowed = new BookLendingData(true, 2021, 10, 18, 2021, 10, 4);
 
+            
+            
             var book = bookSet.get(index);
             //Update Book Item Data
             var updateBookItemData = new BookItemData(title, book.getBookId(), book.getPublishYear(), bookBorrowed);
