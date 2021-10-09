@@ -114,20 +114,32 @@ public class MyLibrary {
 
         //RQ 4 Librarians and Members can Search for books
         // Search by title
+        System.out.println("\n RQ4 - Searching book by Title");
         CatalogCode.search("title", catalog, "Spider-Man");
 
         // Search by Author
+        System.out.println("\n RQ4 - Searching books by author");
         CatalogCode.search("author", catalog, "Stan-Lee");
 
 
-        //RQ 5
+        //RQ 5 Librarians can ban/unban member
+        System.out.println("\n RQ5 - Librarians can ban/unban a member");
+        library = LibrarianCode.banUser(library, library.getMembers().get(0));
+        System.out.println("\n All banned members " + "size( " + library.getBlockedMembers().size() + " )");
+        library.getBlockedMembers().forEach((memberKey, memberInfo)->{System.out.println(memberInfo.getName());});
+
+        library = LibrarianCode.unbanUser(library, library.getMembers().get(0));
+        System.out.println("\n All banned members" + "size( " + library.getBlockedMembers().size() + " )");
+        library.getBlockedMembers().forEach((memberKey, memberInfo)->{System.out.println(memberKey.toString());});
 
         //RQ 6 Librarians can display call books borrowed by a memeber
+        System.out.println("\n RQ6 - Librarian displaying all books currently loaned by a Member");
         var member = MemberCode.MemberInfo(library, currentUser);
         LibrarianCode.displayLentBooks(library, member);
 
         //RQ 7 Multiple books can exist
         //Prints all avaliable books currently in library Catalog
+        System.out.println("\n RQ7 - Showing Multiple copies of a book exist in a system");
         for (Map.Entry<String, BookData> bookCollection : library.getCatalog().getBookByTitle().entrySet()) {
             bookCollection.getValue().getBooks().forEach((book)->{System.out.println(book.getTitle());});
         }

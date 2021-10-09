@@ -1,5 +1,6 @@
 package assignment3.main.code;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +21,33 @@ public class LibrarianCode extends UserCode{
         System.out.println("Invalid email/password for Librarian");
     }
     
-    public static void banUser(){
+    public static LibraryData banUser(LibraryData library, MemberData member){
         
+        Map<String, MemberData> bannedUsers = new HashMap<String, MemberData>();
+        bannedUsers.putAll(library.getBlockedMembers());
+        
+        if(!bannedUsers.containsKey(member.getName()))
+        {
+            bannedUsers.put(member.getName(), member);
+            var newLibrary = new LibraryData(library.getLibrarians(), library.getMembers(), bannedUsers, library.getCatalog());
+            return newLibrary;
+        }
+        
+        return library;
     }
 
-    public static void unbanUser(){
-
+    public static LibraryData unbanUser(LibraryData library, MemberData member){
+        Map<String, MemberData> bannedUsers = new HashMap<String, MemberData>();
+        bannedUsers.putAll(library.getBlockedMembers());
+        
+        if(bannedUsers.containsKey(member.getName()))
+        {
+            bannedUsers.remove(member.getName());
+            var newLibrary = new LibraryData(library.getLibrarians(), library.getMembers(), bannedUsers, library.getCatalog());
+            return newLibrary;
+        }
+        
+        return library;
     }
 
     public static void displayLentBooks(LibraryData library, MemberData member){
