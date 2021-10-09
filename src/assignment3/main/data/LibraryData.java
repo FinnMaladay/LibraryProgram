@@ -1,10 +1,13 @@
 package assignment3.main.data;
 
 import java.util.List;
+import java.util.Map;
 
-import lombok.val;
+import lombok.Value;
 
-@val public class LibraryData {
+@Value public class LibraryData {
     List<LibrarianData> librarians;
     List<MemberData> members;
+    Map<String, MemberData> blockedMembers;
+    CatalogData catalog;
 }
